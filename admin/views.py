@@ -70,4 +70,30 @@ def Deleteusers(request,email):
     showdata=Users.objects.all()
     return render(request,"Counter.html",{"data":showdata})
 
+def updateCustomerStatus(request,email):
+    updateData=Customers.objects.all()
+    if (updateData.filter(email=email).exists and updateData.filter(status=False).filter):  
+        email=email
+        customername=updateData.customername
+        citizenship=updateData.citizenship
+        address=updateData.address
+        password=updateData.password
+        status=True 
+        customertable=Customers(email=email,customername=customername,citizenship=citizenship, address=address,password=password,status=status)
+        usertable=Users(email=email,citizenship=citizenship,username=customername,password=password,position="Customer")
+        customertable.save()
+        usertable.save()  
+    return render(request,'admin.html')  
+
+def counter():
+     return None
+
+def reader():
+    return None
+
+def customer():
+    return None
+
+def admain():
+    return None
 
