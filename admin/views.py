@@ -65,13 +65,14 @@ def updateWorker(request,email,position):
         return render(request,'Editcounter.html',"Failed" )
     return render(request,'EditMeterReader.html',"Failed" )            
 
-
+#Function for deleting a user after taking the email that needs to be deleted
 def Deleteusers(request,email):
-    delusers=Users.objects.get(email=email)
+    delusers=Users.objects.get(email=email) 
     delusers.delete()
     showdata=Users.objects.all()
     return render(request,"Counter.html",{"data":showdata})
 
+#updates the status of customer into true and adds the customer into the user table
 def updateCustomerStatus(request,email):
     updateData=Customers.objects.all()
     if (updateData.filter(email=email).exists and updateData.filter(status=False).filter):  
@@ -87,6 +88,7 @@ def updateCustomerStatus(request,email):
         usertable.save()  
     return render(request,'admin.html')  
 
+#redirect the pages into the given html files (line 89-100)
 def counter(request):
      return render(request,'counter.html')
 

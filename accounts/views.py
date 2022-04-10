@@ -41,6 +41,7 @@ def register(request):
         
         return render(request,'register.html')
 
+# takes user email and password from user to login
 def login(request):
     if request.method == 'POST':
         cust = Users.objects
