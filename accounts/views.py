@@ -2,7 +2,7 @@ from asyncio.windows_events import NULL
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from accounts.models import Customers
+from accounts.models import Customers,Users
 #from django.db import connection
 
 
@@ -40,6 +40,25 @@ def register(request):
     else:
         
         return render(request,'register.html')
+
+def login(request):
+    if request.method == 'POST':
+        cust = Users.objects
+        email=request.POST.get('email')
+        passwords = request.POST.get('password')
+        try:
+            userdetail = cust.get(pk=email)
+            if passwords = userdetail.password:
+                return render('admin')
+
+        except:
+            
+               return render('login')
+
+        
+    else:
+        
+        return render(request,'login.html')
 
 
     
