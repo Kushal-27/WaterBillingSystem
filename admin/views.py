@@ -85,15 +85,14 @@ def updateCustomerStatus(request,email):
         usertable.save()  
     return render(request,'admin.html')  
 
-def counter():
-     return None
+def counter(request):
+     return render(request,'counter.html')
 
-def reader():
-    return None
+def reader(request):
+    return render(request,'meterreader.html')
 
-def customer():
-    return None
+def customer(request):
+    return render(request,'customer.html')
 
-def admain():
-    return None
-
+def admain(request):
+    return render(request,'admain.html')
