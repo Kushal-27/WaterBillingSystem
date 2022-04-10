@@ -11,6 +11,7 @@ from django.contrib import messages
 from admin.forms import userforms
 from django.contrib import messages
 # # Create your views here.
+# Registers new employee that can be done by Admin
 def registerWorkers(request,position):
     if request.method == 'POST':
         cust = Users.objects.all()
@@ -34,6 +35,7 @@ def registerWorkers(request,position):
         else:    
             return render(request,'meterreader.html')
 
+# Returns the list of  employee details from the table that contains the given position
 def displayWorker(request,position):
     showall=Users.objects.get(position=position)
     if (position == 'Counter'):
@@ -41,15 +43,15 @@ def displayWorker(request,position):
     return render(request,'meterreader.html',{"data":showall})
 
 
-    
-def editWorker(request,email):
+ # Get the matching column from the table and redirects the web page as needed   
+def editWorker(request,email,position):
     
     editobj=Users.objects.get(email=email)
     if (position == 'Counter'):
         return render(request,'editcounter.html',{"Users":editobj})
     return render(request,'editmeterreader.html',{"Users":editobj})
 
-
+# Gets data from the user and updates the new data in the table
 def updateWorker(request,email,position):
     updateData=Users.objects.get(email=email)   
     form=userforms(request.Post,instance=updateData)

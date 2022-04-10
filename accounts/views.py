@@ -9,7 +9,7 @@ from accounts.models import Customers,Users
 # Create your views here.
 
 
-
+# Registers new user in the Database after fetching the data from the user
 def register(request):
     if request.method == 'POST':
         cust = Customers.objects.all()
