@@ -64,3 +64,10 @@ def updateWorker(request,email,position):
     return render(request,'EditMeterReader.html',"Failed" )            
 
 
+def Deleteusers(request,email):
+    delusers=Users.objects.get(email=email)
+    delusers.delete()
+    showdata=Users.objects.all()
+    return render(request,"Counter.html",{"data":showdata})
+
+
