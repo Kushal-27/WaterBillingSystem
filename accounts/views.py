@@ -50,7 +50,12 @@ def login(request):
         try:
             userdetail = cust.get(pk=email)
             if passwords == userdetail.password:
-                return render('admin')
+                if(userdetail.position=="Admin"):
+                    return render('admin')
+                elif(userdetail.position=="Counter"):
+                    return render('maincounter')
+                else:
+                    return render('mainmeterreader')        
             return render('login')
         except:
             
