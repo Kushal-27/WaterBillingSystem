@@ -49,7 +49,7 @@ def login(request):
         passwords = request.POST.get('password')
         try:
             userdetail = cust.get(pk=email)
-            if passwords = userdetail.password:
+            if passwords == userdetail.password:
                 return render('admin')
 
         except:
