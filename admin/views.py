@@ -11,7 +11,7 @@ from django.contrib import messages
 from admin.forms import userforms
 from django.contrib import messages
 # # Create your views here.
-# Registers new employee that can be done by Admin
+# Registers new employee into the database
 def registerWorkers(request,position):
     if request.method == 'POST':
         cust = Users.objects.all()
@@ -78,6 +78,7 @@ def Deleteusers(request,email):
 
 #updates the status of customer into true and adds the customer into the user table
 def updateCustomerStatus(request,email):
+<<<<<<< HEAD
     updateData=Customers.objects.all()
     if (updateData.filter(email=email).exists and updateData.filter(status=False).filter):  
         email=email
@@ -91,6 +92,20 @@ def updateCustomerStatus(request,email):
         customertable.save()
         usertable.save()  
     return render(request,'admin.html')        
+=======
+    updateData=Customers.objects.get(pk=email)
+    customername=updateData.customername
+    citizenship=updateData.citizenship
+    address=updateData.address
+    password=updateData.password
+    status=True
+    customertable=Customers(email=email,customername=customername,citizenship=citizenship, address=address,password=password,status=status)
+    usertable=Users(email=email,citizenship=citizenship,username=customername,password=password,position="Customer")
+    customertable.save()
+    usertable.save() 
+    return render(request,'admin.html')
+    
+>>>>>>> afd16eb2cbacb9356fa84a708ab3b8732085910a
 
 #redirect the pages into the given html files (line 89-100)
 def counter(request):
