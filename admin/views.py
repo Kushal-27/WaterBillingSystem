@@ -11,7 +11,7 @@ from django.contrib import messages
 from admin.forms import userforms
 from django.contrib import messages
 # # Create your views here.
-# Registers new employee that can be done by Admin
+# Registers new employee into the database
 def registerWorkers(request,position):
     if request.method == 'POST':
         cust = Users.objects.all()
