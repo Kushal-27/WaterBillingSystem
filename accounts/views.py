@@ -51,7 +51,7 @@ def login(request):
             userdetail = cust.get(pk=email)
             if passwords == userdetail.password:
                 return render('admin')
-
+            return render('login')
         except:
             
                return render('login')
