@@ -52,6 +52,7 @@ def login(request):
             userdetail = cust.get(email=email)
             # return HttpResponse(userdetail.password)
             if passwords == userdetail.password:
+<<<<<<< HEAD
                 # return HttpResponse(userdetail.position)
                 if(userdetail.position == "admin"):
                     return redirect('admain')
@@ -61,6 +62,15 @@ def login(request):
                 else:
                     return redirect('register')
             return redirect('login')
+=======
+                if(userdetail.position=="Admin"):
+                    return render('admin')
+                elif(userdetail.position=="Counter"):
+                    return render('maincounter')
+                else:
+                    return render('mainmeterreader')        
+            return render('login')
+>>>>>>> 5b372ef19fef7881df59ba3d6b36d70a48c56d3a
         except:
 
             return redirect('login')
