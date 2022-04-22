@@ -33,32 +33,41 @@ def register(request):
                 saverecord = Customers(customername=name,email=email,citizenship=citizenship,address=address,password=password1)
                 saverecord.save()
                 print('user created')
-                
+                return render('login')
         else:
         
             return HttpResponse("Wrong password or email")
     else:
         
-        return render(request,'register.html')
+        return render(request,'signup.html')
 
 # takes user email and password from user to login
 def login(request):
     if request.method == 'POST':
-        cust = Users.objects
+        cust = Users.objects.all()
         email=request.POST.get('email')
         passwords = request.POST.get('password')
         try:
-            userdetail = cust.get(pk=email)
+            # return HttpResponse(email)
+            userdetail = cust.get(email=email)
+            # return HttpResponse(userdetail.password)
             if passwords == userdetail.password:
-                return render('admin')
-
+                # return HttpResponse(userdetail.position)
+                if(userdetail.position == "admin"):
+                    return redirect('admain')
+                    
+                elif(userdetail.position=="Counter"):
+                    return redirect('register')
+                else:
+                    return redirect('register')
+            return redirect('login')
         except:
-            
-               return render('login')
 
-        
+            return redirect('login')
+
+
     else:
-        
+
         return render(request,'login.html')
 
 
