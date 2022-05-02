@@ -62,16 +62,16 @@ def editWorker(request,email,position):
 # Gets data from the user and updates the new data in the table
 def updateWorker(request,email,position):
     updateData=Users.objects.get(email=email)   
-    form=userforms(request.Post,instance=updateData)
+    form=userforms(request.POST,instance=updateData)
     if form.is_valid():
         form.save()
         messages.success(request,'Record successfull')
         if(position=="Counter"):
-            return render(request,'Editcounter.html',{"Users":updateData})
-        return render(request,'EditMeterReader.html',{"Users":updateData})
+            return render(request,'editcounter.html',{"Users":updateData})
+        return render(request,'editmeterreader.html',{"Users":updateData})
     if (position=="Counter"):
-        return render(request,'Editcounter.html',"Failed" )
-    return render(request,'EditMeterReader.html',"Failed" )            
+        return render(request,'editcounter.html',"Failed" )
+    return render(request,'editmeterreader.html',"Failed" )            
 
 #Function for deleting a user after taking the email that needs to be deleted
 def deleteusers(request,email):
@@ -171,14 +171,14 @@ def addcounter(request):
         return render(request,'addcounter.html')
     
 def displaycountertable(request):
-    showall=Users.objects.filter(position='counter')
+    showall=Users.objects.filter(position='Counter')
     return render(request,'editcountertabel.html',{"data":showall})
 
 def displayWorkerdata(request,email):
     showall=Users.objects.get(email=email)
     position=showall.position
     # return HttpResponse(showall)
-    if position=="counter":
+    if position=="Counter":
         return render(request,'editcounter.html',{"data":showall})
     return render(request,'editmeterreader.html',{"data":showall})
 
@@ -192,7 +192,7 @@ def updateWorkerdata(request,email):
         form.save()
         messages.success(request,'Record successfull')
         if(position=="Counter"):
-            return render(request,'Editcounter.html',{"data":updateData})
-        return render(request,'EditMeterReader.html',{"data":updateData})
+            return render(request,'editcounter.html',{"data":updateData})
+        return render(request,'editmeterreader.html',{"data":updateData})
     else:
         return HttpResponse("failed")
