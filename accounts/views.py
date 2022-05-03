@@ -57,9 +57,9 @@ def login(request):
                     return redirect('admain')
                     
                 elif(userdetail.position=="Counter"):
-                    return redirect('counter')
+                    return redirect('counterhome')
                 else:
-                    return redirect('meterreader')
+                    return redirect('meterreaderhome')
             return redirect('login')
         except:
 

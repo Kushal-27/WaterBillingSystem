@@ -48,7 +48,7 @@ def displayWorker(request,position):
     return render(request,'editmeterreadertable.html',{"data":showall})
 
 def displaymeterreader(request):
-    showall=Users.objects.filter(position='meterreader')
+    showall=Users.objects.filter(position='Meterreader')
     return render(request,'editmeterreadertable.html',{"data":showall})
 
  # Get the matching column from the table and redirects the web page as needed   
