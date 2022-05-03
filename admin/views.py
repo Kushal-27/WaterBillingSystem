@@ -142,7 +142,7 @@ def addmeterreader(request):
             
             return redirect('registermeter')
         else:
-            saverecord = Users(email=email,citizenship=citizenship,password="Pass",position="meterreader")
+            saverecord = Users(email=email,citizenship=citizenship,password="Pass",position="Meterreader")
             saverecord.save()
             print('user created')
             return redirect('reader')    
@@ -162,7 +162,7 @@ def addcounter(request):
             
             return redirect('addcounter')
         else:
-            saverecord = Users(email=email,citizenship=citizenship,password="Pass",position="counter")
+            saverecord = Users(email=email,citizenship=citizenship,password="Pass",position="Counter")
             saverecord.save()
             print('user created')
             return redirect('counter')    
