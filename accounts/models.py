@@ -14,7 +14,7 @@ class Customers(models.Model):
     currentunit= models.IntegerField(default=0)
     discountamount=models.IntegerField(default=0)
     fineamount=models.IntegerField(default=0)
-    totaldue=models.IntegerField(default=0)
+    totaldue=models.IntegerField(default=1)
 
 class Users(models.Model):
     email = models.EmailField(primary_key=True)
