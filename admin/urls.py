@@ -21,4 +21,5 @@ urlpatterns = [
     path('displaycountertable',views.displaycountertable, name='displaycountertable'),
     path('displayWorkerdata/updateWorkerdata/<str:email>',views.updateWorkerdata,name='updateWorkerdata'),
     path('displayWorkerdata/<str:email>', views.displayWorkerdata,name='displayWorkerdata'),
+    
 ]
