@@ -1,42 +1,45 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from admin.models import Users
+from accounts.models import Users
 from accounts.models import Customers
 from accounts.models import Rates
-from admin.forms import userforms
+from meterreader.forms import customerforms
 from django.contrib import messages
 # Create your views here.
 def meterreaderhome(request):
     if request.method == "POST":
         # return HttpResponse("....")
-        meternum=request.POST.get('meternum')
-        lastestunit=request.POST.get('latestunit')
+        meternum=int(request.POST.get('meternum'))
+        lastestunit=int(request.POST.get('latestunit'))
        
         try:
             cust=Customers.objects.get(meternum=meternum)
             
-            previousunit=cust.currentunit
+            previousunit=int(cust.currentunit)
             
             rates=Rates.objects.get(pk=1)
-            previousunit=cust.currentunit
-            
-            
-            if previousunit < lastestunit and cust.status== True:
+            fineamount=0
+            if previousunit<lastestunit and cust.status==True:
                 
                 currentunit=lastestunit-previousunit
-                if(cust.totaldue!=0):
-                    fineamount=((rates.fine)/100 * (currentunit*(rates.rate)))
-                    totaldue=cust.totaldue+(currentunit*(rates.rate))+fineamount
+                
+                if(int(cust.totaldue)!=0):
+                    fineamount=round(((int(rates.fine))/100 * (currentunit*(int(rates.rate)))))
+                    totaldue=int(cust.totaldue)+(currentunit*(int(rates.rate)))+fineamount
                 else:
-                    totaldue=cust.totaldue + currentunit*(rates.rate)
-
-                thisdict={"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":lastestunit,"discountamount":0,"fineamount":fineamount,"previousunit":cust.currenntunit,"totaldue":totaldue,"meternum":cust.meternum}
-                form=userforms(thisdict,instance=cust)
+                    
+                    totaldue=int(cust.totaldue) + currentunit*(int(rates.rate))
+                # return HttpResponse(fineamount)    
+                thisdict={"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":lastestunit,"discountamount": 0 ,"fineamount":fineamount,"previousunit":cust.currentunit,"totaldue":totaldue,"meternum":cust.meternum}
+                
+                form=customerforms(thisdict,instance=cust)
+                # return HttpResponse(form)
                 if form.is_valid():
                     form.save()
                     messages.success(request,"Meter unit added successfully")
                 else:
+                    # return HttpResponse("failed")
                     messages.success(request,"Adding meter unit failed")
             else:
                 
@@ -44,10 +47,11 @@ def meterreaderhome(request):
                     messages.success(request,"Latest unit should be greater than previous unit")
                 if cust.status== False:
                     messages.success(request,"User is inactive")
-                return render(request,'meterreaderhome.html')    
+            return render(request,'meterreaderhome.html')    
         except:
             return HttpResponse("except")
             messages.success(request,"Meter number does not exist")
+            
             return render(request,"meterreaderhome.html")
     else:
         return render(request,'meterreaderhome.html')
