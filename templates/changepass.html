@@ -38,7 +38,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown ">
             <li><a class="dropdown-item" href="#">Log-Out</a></li>
-            <li><a class="dropdown-item" href="changepass">Change-Pw </a></li>
+            <li><a class="dropdown-item" href="#">Change-Pw </a></li>
             
           </ul>
         </span>
@@ -58,34 +58,26 @@
             <h4 >Admin</h4>
             <img src="admin.png" alt="Avatar">
           </div>
-          <!-- partial:index.partial.html -->
           <div class="lass">
-<div class="login-form">
-    <form>
-      <h1>Add Meter</h1>
-      <div class="content">
-        <div class="input-field">
-          <input type="number" placeholder="Meter Number:" autocomplete="nope">
+          <div class="login-form">
+            <form action="changepass" method="post">
+              {% csrf_token %}
+              <h1>Change Password</h1>
+              <div class="content">
+                <div class="input-field">
+                  <input name='password' type="password" placeholder="New Password:" autocomplete="nope">
+                </div>
+                <div class="input-field">
+                  <input name='password1' type="password" placeholder="Confirm Password:" autocomplete="Latest unit:">
+                </div>
+              </div>
+              <div class="action">
+                <button>Submit</button>
+              </div>
+              
+            </form>
+          </div>
         </div>
-        <div class="input-field">
-          <input type="number" placeholder="latest unit:" autocomplete="Latest unit:">
-        </div>
-      </div>
-      <div class="action">
-        <button>Submit</button>
-      </div>
-    </form>
-  </div>
-  </div>
-
-
-
-
-          
-  
-  
-  
-  
         </div>
 
         <div class="col-lg-2 box">

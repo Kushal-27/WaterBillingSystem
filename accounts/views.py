@@ -63,7 +63,7 @@ def login(request):
             return redirect('login')
         except:
 
-            return redirect('login')
+            return HttpResponse('wrong')
 
 
     else:
