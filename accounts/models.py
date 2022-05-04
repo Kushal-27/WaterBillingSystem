@@ -26,4 +26,4 @@ class Users(models.Model):
 class Rates(models.Model):
     rate= models.IntegerField(default=0)
     fine=models.IntegerField(default=0)
-    rate=models.IntegerField(default=0)
+    discount=models.IntegerField(default=0)
