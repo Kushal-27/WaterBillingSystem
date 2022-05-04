@@ -8,14 +8,22 @@ from admin.forms import userforms
 from django.contrib import messages
 # Create your views here.
 def meterreaderhome(request):
-    if request.method == 'POST':
+    if request.method == "POST":
+        # return HttpResponse("....")
         meternum=request.POST.get('meternum')
         lastestunit=request.POST.get('latestunit')
+       
         try:
-            cust=Customers.objects.get(meternum)
-            rates=Rates.objects.get(PK=1)
+            cust=Customers.objects.get(meternum=meternum)
+            
             previousunit=cust.currentunit
+            
+            rates=Rates.objects.get(pk=1)
+            previousunit=cust.currentunit
+            
+            
             if previousunit < lastestunit and cust.status== True:
+                
                 currentunit=lastestunit-previousunit
                 if(cust.totaldue!=0):
                     fineamount=((rates.fine)/100 * (currentunit*(rates.rate)))
@@ -31,12 +39,14 @@ def meterreaderhome(request):
                 else:
                     messages.success(request,"Adding meter unit failed")
             else:
+                
                 if previousunit > lastestunit:
                     messages.success(request,"Latest unit should be greater than previous unit")
                 if cust.status== False:
                     messages.success(request,"User is inactive")
                 return render(request,'meterreaderhome.html')    
         except:
+            return HttpResponse("except")
             messages.success(request,"Meter number does not exist")
             return render(request,"meterreaderhome.html")
     else:

@@ -61,15 +61,15 @@
           <!-- partial:index.partial.html -->
           <div class="lass">
 <div class="login-form">
-    <form action="meterreaderhome" method="POST">
+    <form action="" method="POST">
       {% csrf_token %}
       <h1>Add Meter</h1>
       <div class="content">
         <div class="input-field">
-          <input type="number" placeholder="Meter Number:" autocomplete="nope">
+          <input type="number" name="meternum" placeholder="Meter Number:" autocomplete="nope">
         </div>
         <div class="input-field">
-          <input type="number" placeholder="latest unit:" autocomplete="Latest unit:">
+          <input type="number"name="latestunit" placeholder="latest unit:" autocomplete="Latest unit:">
         </div>
       </div>
       <div class="action">
