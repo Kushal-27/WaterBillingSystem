@@ -1,7 +1,7 @@
 from django.urls import  path
 from meterreader import views
 urlpatterns = [
-    path('',views.meterreader,name='meterreaderhome'),
-    path('changepass/<str:email>',views.changepass,name='changepass'),
+    path('meterreaderhome',views.meterreaderhome,name='meterreaderhome'),
+    # path('addmeter',views.addmeter,name='addmeter'),
     
 ]

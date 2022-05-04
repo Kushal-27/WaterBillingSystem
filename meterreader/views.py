@@ -7,11 +7,7 @@ from accounts.models import Rates
 from admin.forms import userforms
 from django.contrib import messages
 # Create your views here.
-def meterreader(request):
-    
-    return render(request,'meterreaderhome.html')
-
-def addmeter(request):
+def meterreaderhome(request):
     if request.method == 'POST':
         meternum=request.POST.get('meternum')
         lastestunit=request.POST.get('latestunit')
@@ -44,7 +40,8 @@ def addmeter(request):
             messages.success(request,"Meter number does not exist")
             return render(request,"meterreaderhome.html")
     else:
-        return HttpResponse("HOW?")      
+        return render(request,'meterreaderhome.html')
+    
 
 def changepass(request,email):
     showall = Users.objects.get(email=email)
