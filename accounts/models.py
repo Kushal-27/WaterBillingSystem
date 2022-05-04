@@ -1,3 +1,4 @@
+from math import degrees
 from django.db import models
 from django.forms import NullBooleanField
 
@@ -22,3 +23,7 @@ class Users(models.Model):
     password = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
 
+class Rates(models.Model):
+    rate= models.IntegerField(default=0)
+    fine=models.IntegerField(default=0)
+    rate=models.IntegerField(default=0)
