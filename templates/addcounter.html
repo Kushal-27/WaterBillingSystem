@@ -45,8 +45,14 @@
             
             <input type="text" id="lname" name="citizenship"  placeholder="Citizenship:"><br><br>
             <input type="submit" value="Add counter" class="i"><br>
-            <input type="submit" value="Cancel" class="i">
+            
           </form>
+          <form action="counter" method="post">
+
+            {% csrf_token %}
+              
+              <input type="submit" value="Cancel" class="i">
+            </form>
 
       </div>
       </div>

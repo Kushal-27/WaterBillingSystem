@@ -34,8 +34,8 @@
           <img src="admin.png" alt="Avatar">
         </div>
         <h2>Edit Meter Reader</h2>
-        <form method="POST" action="updateWorkerdata/{{data.email}}">
-        {% csrf_token %}
+        <form method="POST" action="updateWorker/{{data.email}}/{{data.position}}">
+          {% csrf_token %}
         <table border="1">
           <tr>
               <td>User Email</td>

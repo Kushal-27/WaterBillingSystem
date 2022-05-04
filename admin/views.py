@@ -196,3 +196,4 @@ def updateWorkerdata(request,email):
         return render(request,'editmeterreader.html',{"data":updateData})
     else:
         return HttpResponse("failed")
+    
