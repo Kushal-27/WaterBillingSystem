@@ -19,53 +19,40 @@
         {% csrf_token %}
         <div class="user-details">
           <div class="input-box">
-            <span class="details" >First Name</span>
-            <input type="text" placeholder="First Name" name="first_name" required>
-          </div>
-          <div class="input-box">
-            <span class="details" >Middle Name</span>
-            <input type="text" name="middle_name" placeholder="Middle Name" >
-          </div>
-          <div class="input-box">
-            <span class="details" >Email.</span>
-            <input type="email" name="email" placeholder="Email" required>
-          </div>
-          <div class="input-box">
-            <span class="details" >Last Name</span>
-            <input type="text" name="last_name" placeholder="Last Name" required>
-          </div>
-          <div class="input-box">
-            <span class="details" >District</span>
-            <input type="text" name="district" placeholder="District" required>
+            <span class="details" >Full Name</span>
+            <input type="text" placeholder="Full Name" name="full_name" required>
           </div>
           
+          <div class="input-box">
+            <span class="details" >Email</span>
+            <input type="email" name="email" placeholder="Email" required>
+          </div>
+         
           <div class="input-box">
             <span class="details" >Citizenship No.</span>
             <input type="text" name="citizenship" placeholder="Citizenship Number" required>
           </div>
-          
+
           <div class="input-box">
-            <span class="details" >Municipality</span>
-            <input type="text" name="municipality" placeholder="Municipality" required>
+            <span class="details" >Address</span>
+            <input type="text" name="address" placeholder="Address" required>
           </div>
+          
           <div class="input-box">
             <span class="details" > Password</span>
             <input type="password" name="password1" placeholder="Password" required>
           </div>
-          <div class="input-box">
-            <span class="details">Ward No.</span>
-            <input type="text"  name="wardno" placeholder="Ward No" required>
-          </div>
+
           <div class="input-box">
             <span class="details" >Confirm Password</span>
             <input type="password" name="password2" placeholder="Confirm Password" required>
           </div>
+          
           <div class="input-box">
-            <span class="details" >Town/Village</span>
-            <input type="text" name="town" placeholder="Town/Village" required>
-          </div>
-         
-        
+            <span class="details" >Meter number</span>
+            <input type="number" name="meternum" placeholder="Meter Number" required>
+          </div>      
+      
           
         </div>
     
