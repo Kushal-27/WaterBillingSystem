@@ -68,10 +68,12 @@ def login(request):
                     return render(request,'customerhome.html',{"dat":custs})
                 else:
                     return redirect('meterreaderhome')
+            else:
+                messages.success(request,"Wrong Password")      
             return redirect('login')
         except:
-
-            return HttpResponse('User not found or inactive')
+            messages.success(request,"User not found or inactive")
+            return redirect('login')
 
 
     else:

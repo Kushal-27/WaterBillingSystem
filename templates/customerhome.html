@@ -13,7 +13,6 @@
     <title>Water billing system</title>
   </head>
   <body>
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -52,43 +51,28 @@
     <div class="container-fluid total">
       <div class="row">
         
-        <div class="col-lg-10 ">
+        <div class="col-lg-12 ">
           <div class="admin">
             <h4 >Admin</h4>
             <img src="admin.png" alt="Avatar">
           </div>
-          
-<body>
-    <div class="container">
-        {%for data in dat%}
-        <ul >
-          <li> <div class="bottom">Costumer Name:<br>  {{data.customername}} </div> </li>
-          <li> <div class="bottom">Citizenship:<br>  {{data.citizenship}} </div> </li>
-          <li> <div class="bottom">Email: <br> {{data.email}} </div> </li>
-          <li> <div class="bottom">Address:<br> {{data.address}} </div> </li>
-          <li> <div class="bottom">Meter No: <br> {{data.meternum}} </div> </li>
-          <li> <div class="bottom">Amount Due:<br>  {{data.totaldue}} </div> </li>
-        </ul>
-        {%endfor%}
-      
-    </div> 
-</body>
+          <body>
+            <div class="container">
+              {%for data in dat%}
+              <ul >
+                <li> <div class="bottom">Costumer Name:<br>  <b style="color: black;"> {{data.customername}}</b> </div> </li>
+                <li> <div class="bottom">Citizenship:<br> <b style="color: black;"> {{data.citizenship}}</b> </div> </li>
+                <li> <div class="bottom">Email: <br><b style="color: black;"> {{data.email}}</b> </div> </li>
+                <li> <div class="bottom">Address:<br><b style="color: black;"> {{data.address}}</b> </div> </li>
+                <li> <div class="bottom">Meter No: <br><b style="color: black;"> {{data.meternum}} </b></div> </li>
+                <li> <div class="bottom">Amount Due:<br> <b style="color: black;"> {{data.totaldue}}</b> </div> </li>
+              </ul>
+              {%endfor%}
+            </div> 
+        </body>
+                </div>
+    
         </div>
-
-        <div class="col-lg-2 box">
-          <h2 class="wtr">Dash Board</h2>
-          <ul >
- 
-            <li class="d p-2 text-center "><i class="fa fa-user" aria-hidden="true"></i><br><a class="a " href="admin.html">Admin</a></li>
-            <li class="d p-2 text-center "><i class="fa fa-users" aria-hidden="true"></i><br><a class="a" href="costumer.html">Customer</a></li>
-            <li class="d p-2  text-center "><i class="fa fa-calculator" aria-hidden="true"></i><br><a class="a" href="costumer.html">Meter Reader</a></li>
-            <li class="d p-2 text-center "><i class="fa fa-id-card" aria-hidden="true"></i>><br><a class="a" href="counter.html">Counter</a></li>
-            <li class="d p-2 text-center "><i class="fa fa-building" aria-hidden="true"></i><br><a class="a" href="billrate.html">Bill Rate</a></li>
-          </ul>
-
-
-        </div>
-
         
       </div>
       </div>
