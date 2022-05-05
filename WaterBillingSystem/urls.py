@@ -24,5 +24,6 @@ urlpatterns = [
     #path('acccounts/',include('accounts.urls'))
     path('meterreader/', include('meterreader.urls')),
     path('counter/', include('counter.urls')),
+    path('home/<str:email>', include('customer.urls')),
 
 ]
