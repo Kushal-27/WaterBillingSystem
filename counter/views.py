@@ -30,24 +30,26 @@ def counterhome(request):
                 totaldue=totaldue-enteredmoney    
             else:
                 totaldue=0
-                returnmoney=enteredmoney-totaldue        
+                returnmoney= enteredmoney-cust.totaldue        
             thisdict={"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":cust.currentunit,"discountamount": discountamount ,"fineamount":cust.fineamount,"previousunit":cust.previousunit,"totaldue":totaldue,"meternum":cust.meternum}
                 
             form=customerforms(thisdict,instance=cust)
                 # return HttpResponse(form)
             if form.is_valid():
                 form.save()
-                messages.success(request,"Meter unit added successfully")
+                # return HttpResponse("dsa")
+                messagess="Paid successfully. Money due:",cust.totaldue,". Remaining money:",returnmoney
+                messages.success(request,messagess)
+                # return HttpResponse("error")
             else:
                     # return HttpResponse("failed")
-                messages.success(request,"Adding meter unit failed")
-            returndict= {"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":cust.currentunit,"discountamount": discountamount ,"fineamount":cust.fineamount,"previousunit":cust.previousunit,"totaldue":totaldue,"meternum":cust.meternum,"returnmoney":returnmoney}   
+                messages.success(request,"Adding meter unit failed.")
+            returndict= {"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":cust.currentunit,"discountamount": discountamount ,"fineamount":cust.fineamount,"previousunit":cust.previousunit,"totaldue":totaldue,"meternum":cust.meternum,"returnmoney":returnmoney}
             return render(request,'counterhome.html',returndict)    
         except:
-            return HttpResponse("User does not exist")
+            # return HttpResponse("User does not exist")
             messages.success(request,"Meter number does not exist")
-            
-            return render(request,"meterreaderhome.html")
+            return render(request,"counterhome.html")
     else:
         
         return render(request,'counterhome.html')

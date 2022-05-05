@@ -68,6 +68,11 @@
                 <div class="input-field">
                   <input type="number" name="enteredmoney" placeholder="Given money:" autocomplete="Given money:">
                 </div>
+                {%if messages%}
+                        {%for mess in messages%}
+                        <b style="color: red;">{{mess}}</b>
+                        {%endfor%}
+                {%endif%}
               </div>
               <div class="action">
                 <button>Submit</button>
