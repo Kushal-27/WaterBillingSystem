@@ -35,6 +35,7 @@ def register(request):
 
             else:
                 saverecord = Customers(customername=name,email=email,citizenship=citizenship,address=address,password=password1,meternum=meternum)
+                
                 saverecord.save()
                 print('user created')    
         else:
