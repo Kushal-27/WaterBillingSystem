@@ -37,17 +37,17 @@ def counterhome(request):
                 # return HttpResponse(form)
             if form.is_valid():
                 form.save()
-                messages.success(request,"Meter unit added successfully")
+                # return HttpResponse("dsa")
+                messages.success(request,"Paid successfully. Due:"+totaldue+".Return money:"+returnmoney)
             else:
                     # return HttpResponse("failed")
-                messages.success(request,"Adding meter unit failed")
-            returndict= {"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":cust.currentunit,"discountamount": discountamount ,"fineamount":cust.fineamount,"previousunit":cust.previousunit,"totaldue":totaldue,"meternum":cust.meternum,"returnmoney":returnmoney}   
+                messages.success(request,"Adding meter unit failed.")
+            returndict= {"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":cust.currentunit,"discountamount": discountamount ,"fineamount":cust.fineamount,"previousunit":cust.previousunit,"totaldue":totaldue,"meternum":cust.meternum,"returnmoney":returnmoney}
             return render(request,'counterhome.html',returndict)    
         except:
-            return HttpResponse("User does not exist")
+            # return HttpResponse("User does not exist")
             messages.success(request,"Meter number does not exist")
-            
-            return render(request,"meterreaderhome.html")
+            return render(request,"counterhome.html")
     else:
         
         return render(request,'counterhome.html')

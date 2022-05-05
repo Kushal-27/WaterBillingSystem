@@ -10,12 +10,12 @@ class Customers(models.Model):
     address = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     status = models.BooleanField(default=False)
-    meternum= models.CharField(max_length=200,unique=True,default=None)
-    previousunit= models.IntegerField(default=0)
-    currentunit= models.IntegerField(default=0)
-    discountamount=models.IntegerField(default=0)
-    fineamount=models.IntegerField(default=0)
-    totaldue=models.IntegerField(default=0)
+    meternum= models.BigIntegerField(unique=True,default=None)
+    previousunit= models.BigIntegerField(default=0)
+    currentunit= models.BigIntegerField(default=0)
+    discountamount=models.BigIntegerField(default=0)
+    fineamount=models.BigIntegerField(default=0)
+    totaldue=models.BigIntegerField(default=0)
 
 class Users(models.Model):
     email = models.EmailField(primary_key=True)

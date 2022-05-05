@@ -49,7 +49,7 @@ def meterreaderhome(request):
                     messages.success(request,"User is inactive")
             return render(request,'meterreaderhome.html')    
         except:
-            return HttpResponse("except")
+            # return HttpResponse("except")
             messages.success(request,"Meter number does not exist")
             
             return render(request,"meterreaderhome.html")
