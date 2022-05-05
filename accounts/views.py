@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from accounts.models import Customers,Users
+from django.contrib import messages
 #from django.db import connection
 
 
@@ -13,7 +14,6 @@ from accounts.models import Customers,Users
 # Registers new user in the Database after fetching the data from the user
 def register(request):
     if request.method == 'POST':
-        
         cust = Customers.objects.all()
         name=request.POST.get('full_name')    
         email = request.POST.get('email')
@@ -26,15 +26,15 @@ def register(request):
             
             if cust.filter(email=email).exists() or cust.filter(citizenship=citizenship).exists():
                 print('email taken')
+                messages.success(request,"Email Taken already.")
                 return redirect('register')
             else:
                 saverecord = Customers(customername=name,email=email,citizenship=citizenship,address=address,password=password1,meternum=meter)
                 saverecord.save()
-                print('user created')
-                return redirect('login')
+                print('user created')    
         else:
-        
-            return HttpResponse("Wrong password or email")
+            messages.success(request,"Password & Confirm Password must be same")
+        return redirect('login')
     else:
         
         return render(request,'signup.html')
