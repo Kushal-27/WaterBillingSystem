@@ -60,27 +60,17 @@
           
 <body>
     <div class="container">
-      <table>
-        <tr>
-          <th>Customer Name</th>
-          <th>Citizenship</th>
-          <th><button>Email</button></th>
-          <th><button>Address</button></th>
-          <th><button>Meter Number</button></th>
-          <th><button>Amount Due</button></th>
-        </tr>
-        {%for data in datas%}
-        <tr>
-            <td>{{data.customername}}</td>
-            <td>{{data.citizenship}}</td>
-            <td>{{data.email}}</td>
-            <td>{{data.address}}</td>
-            <td>{{data.meterno}}</td>
-            <td>{{data.totaldue}}</td>
-            
-        </tr>
+        {%for data in dat%}
+        <ul >
+          <li> <div class="bottom">Costumer Name:<br>  {{data.customername}} </div> </li>
+          <li> <div class="bottom">Citizenship:<br>  {{data.citizenship}} </div> </li>
+          <li> <div class="bottom">Email: <br> {{data.email}} </div> </li>
+          <li> <div class="bottom">Address:<br> {{data.address}} </div> </li>
+          <li> <div class="bottom">Meter No: <br> {{data.meternum}} </div> </li>
+          <li> <div class="bottom">Amount Due:<br>  {{data.totaldue}} </div> </li>
+        </ul>
         {%endfor%}
-      </table>
+      
     </div> 
 </body>
         </div>

@@ -62,13 +62,16 @@ def login(request):
                 elif(userdetail.position=="Counter"):
                     return redirect('counterhome')
                 elif(userdetail.position=="Customer"):
-                    return redirect('home',email)
+                    # return HttpResponse('error')
+                    custs=Customers.objects.filter(email=email)
+                    # return HttpResponse(custs)
+                    return render(request,'customerhome.html',{"dat":custs})
                 else:
                     return redirect('meterreaderhome')
             return redirect('login')
         except:
 
-            return HttpResponse('wrong')
+            return HttpResponse('User not found or inactive')
 
 
     else:
