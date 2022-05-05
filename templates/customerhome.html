@@ -31,6 +31,7 @@
       </ul>
       <form class="d-flex me-4 ">
         <span class="nav-item dropdown abc">
+          
           <a class="nav-link dropdown-toggle logout " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-bars" aria-hidden="true"></i>
           </a>
@@ -60,7 +61,7 @@
             <div class="container">
               {%for data in dat%}
               <ul >
-                <li> <div class="bottom">Costumer Name:<br>  <b style="color: black;"> {{data.customername}}</b> </div> </li>
+                <li> <div class="bottom">Custumer Name:<br>  <b style="color: black;"> {{data.customername}}</b> </div> </li>
                 <li> <div class="bottom">Citizenship:<br> <b style="color: black;"> {{data.citizenship}}</b> </div> </li>
                 <li> <div class="bottom">Email: <br><b style="color: black;"> {{data.email}}</b> </div> </li>
                 <li> <div class="bottom">Address:<br><b style="color: black;"> {{data.address}}</b> </div> </li>
