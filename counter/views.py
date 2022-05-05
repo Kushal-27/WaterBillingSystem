@@ -42,7 +42,7 @@ def counterhome(request):
                     # return HttpResponse("failed")
                 messages.success(request,"Adding meter unit failed")
             returndict= {"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":cust.currentunit,"discountamount": discountamount ,"fineamount":cust.fineamount,"previousunit":cust.previousunit,"totaldue":totaldue,"meternum":cust.meternum,"returnmoney":returnmoney}   
-            return render(request,'meterreaderhome.html',thisdict)    
+            return render(request,'counterhome.html',returndict)    
         except:
             return HttpResponse("User does not exist")
             messages.success(request,"Meter number does not exist")
