@@ -63,10 +63,10 @@
               <h1>Add Counter</h1>
               <div class="content">
                 <div class="input-field">
-                  <input type="number" name="meternum" placeholder="Meter number:" autocomplete="nope">
+                  <input type="number" name="meternum" placeholder="Meter number:" autocomplete="nope" min=0>
                 </div>
                 <div class="input-field">
-                  <input type="number" name="enteredmoney" placeholder="Given money:" autocomplete="Given money:">
+                  <input type="number" name="enteredmoney" placeholder="Given money:" autocomplete="Given money:" min=0>
                 </div>
                 {%if messages%}
                         {%for mess in messages%}

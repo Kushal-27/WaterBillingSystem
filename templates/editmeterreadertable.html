@@ -40,13 +40,15 @@
           <tr>
             <th>User E-mail</th>
             <th>Citizenship</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Password</th>
+            <th><button>Edit</button></th>
+            <th><button>Delete</button></th>
           </tr>
           {%for result in data%}
           <tr>
               <td>{{result.email}}</td>
               <td>{{result.citizenship}}</td>
+              <td>{{result.password}}</td>
               <td><a href="displayWorkerdata/{{result.email}}">Edit</a></td>
               <td><a href="deleteusers/{{result.email}}" onclick="confirm('Are You Sure Want To Delete the Record?')">Delete</a></td>
           </tr>
