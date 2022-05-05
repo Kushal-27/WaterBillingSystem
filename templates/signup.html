@@ -55,7 +55,11 @@
       
           
         </div>
-    
+        {%if messages%}
+                        {%for mess in messages%}
+                        <b style="color: bisque;">{{mess}}</b>
+                        {%endfor%}
+        {%endif%}
         <div class="button">
           <input type="submit" value="Sign Up">
         </div>

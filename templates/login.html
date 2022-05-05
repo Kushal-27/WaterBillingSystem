@@ -36,6 +36,11 @@
                   <input type="checkbox">
                   <span>Remember me</span>
                 </div>-->
+                {%if messages%}
+                        {%for mess in messages%}
+                        <b style="color: bisque;">{{mess}}</b>
+                        {%endfor%}
+                {%endif%}
                 <div class="forget-pass">
                   <a href="{% url 'register'%}">Register</a>
                 </div>

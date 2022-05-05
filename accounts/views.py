@@ -21,15 +21,20 @@ def register(request):
         address = request.POST.get('address')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
-        meter=request.POST.get('meternum')
+        meternum=request.POST.get('meternum')
         if password1==password2:
             
-            if cust.filter(email=email).exists() or cust.filter(citizenship=citizenship).exists():
-                print('email taken')
-                messages.success(request,"Email Taken already.")
-                return redirect('register')
+            if cust.filter(email=email).exists() or cust.filter(citizenship=citizenship).exists() or cust.filter(meternum=meternum).exists():
+                if cust.filter(email=email).exists():
+                    messages.success(request,"Email Taken already.")
+                if  cust.filter(citizenship=citizenship).exists():
+                    messages.success(request,"Citizenship Taken already.")
+                if cust.filter(meternum=meternum).exists():
+                    messages.success(request,"Meter number registered already.")
+                return render(request,'signup.html')
+
             else:
-                saverecord = Customers(customername=name,email=email,citizenship=citizenship,address=address,password=password1,meternum=meter)
+                saverecord = Customers(customername=name,email=email,citizenship=citizenship,address=address,password=password1,meternum=meternum)
                 saverecord.save()
                 print('user created')    
         else:
