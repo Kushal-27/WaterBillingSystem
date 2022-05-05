@@ -12,17 +12,19 @@ def counterhome(request):
     if request.method == "POST":
         # return HttpResponse("....")
         meternum=int(request.POST.get('meternum'))
-        enteredmoney=int(request.POST.get('enteredmonet'))
+        enteredmoney=int(request.POST.get('enteredmoney'))
        
         try:
             cust=Customers.objects.get(meternum=meternum)
             totaldue=int(cust.totaldue)
+            fineamount=int(cust.fineamount)
             rates=Rates.objects.get(pk=1)
             discountrate= int(rates.discount)
+            
             discountamount=0
             returnmoney=0
             if enteredmoney<totaldue:
-                if totaldue==0:
+                if fineamount==0:
                     discountamount=round((discountrate/100)*totaldue)
                     totaldue=totaldue- discountamount
                 totaldue=totaldue-enteredmoney    
@@ -42,10 +44,11 @@ def counterhome(request):
             returndict= {"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":cust.currentunit,"discountamount": discountamount ,"fineamount":cust.fineamount,"previousunit":cust.previousunit,"totaldue":totaldue,"meternum":cust.meternum,"returnmoney":returnmoney}   
             return render(request,'meterreaderhome.html',thisdict)    
         except:
-            return HttpResponse("except")
+            return HttpResponse("User does not exist")
             messages.success(request,"Meter number does not exist")
             
             return render(request,"meterreaderhome.html")
     else:
-        return render(request,'meterreaderhome.html')
+        
+        return render(request,'counterhome.html')
 
