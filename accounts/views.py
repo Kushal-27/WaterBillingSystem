@@ -58,6 +58,8 @@ def login(request):
                     
                 elif(userdetail.position=="Counter"):
                     return redirect('counterhome')
+                elif(userdetail.position=="Customer"):
+                    return redirect('customerhome')
                 else:
                     return redirect('meterreaderhome')
             return redirect('login')
