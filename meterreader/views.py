@@ -19,13 +19,13 @@ def meterreaderhome(request):
             previousunit=int(cust.currentunit)
             
             rates=Rates.objects.get(pk=1)
-            fineamount=0
+            fineamount=0      
             if previousunit<lastestunit and cust.status==True:
                 
                 currentunit=lastestunit-previousunit
                 
-                if(int(cust.totaldue)!=0):
-                    fineamount=round(((int(rates.fine))/100 * (currentunit*(int(rates.rate)))))
+                if(int(cust.totaldue)!=0):              
+                    fineamount=round(((int(rates.fine))/100 * (currentunit*(int(rates.rate)))))               
                     totaldue=int(cust.totaldue)+(currentunit*(int(rates.rate)))+fineamount
                 else:
                     

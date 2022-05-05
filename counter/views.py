@@ -30,7 +30,7 @@ def counterhome(request):
                 totaldue=totaldue-enteredmoney    
             else:
                 totaldue=0
-                returnmoney=enteredmoney-totaldue        
+                returnmoney= enteredmoney-cust.totaldue        
             thisdict={"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":cust.currentunit,"discountamount": discountamount ,"fineamount":cust.fineamount,"previousunit":cust.previousunit,"totaldue":totaldue,"meternum":cust.meternum}
                 
             form=customerforms(thisdict,instance=cust)
@@ -38,7 +38,9 @@ def counterhome(request):
             if form.is_valid():
                 form.save()
                 # return HttpResponse("dsa")
-                messages.success(request,"Paid successfully. Due:"+totaldue+".Return money:"+returnmoney)
+                messagess="Paid successfully. Money due:",cust.totaldue,". Remaining money:",returnmoney
+                messages.success(request,messagess)
+                # return HttpResponse("error")
             else:
                     # return HttpResponse("failed")
                 messages.success(request,"Adding meter unit failed.")
