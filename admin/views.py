@@ -105,7 +105,7 @@ def deleteusers(request,email):
 def activateusers(request,email):
     cust=Customers.objects.get(email=email)
     thisdict={"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":True,"currentunit":cust.currentunit,"discountamount": cust.discountamount ,"fineamount":cust.fineamount,"previousunit":cust.currentunit,"totaldue":cust.totaldue,"meternum":cust.meternum}
-    return HTTPResponse(thisdict)          
+    # return HTTPResponse(thisdict)          
     form=customerforms(thisdict,instance=cust)
     if form.is_valid():
         form.save()
