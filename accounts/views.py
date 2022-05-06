@@ -38,9 +38,10 @@ def register(request):
                 
                 saverecord.save()
                 print('user created')    
+                return redirect('login')
         else:
             messages.success(request,"Password & Confirm Password must be same")
-        return redirect('login')
+            return redirect('register')
     else:
         
         return render(request,'signup.html')
@@ -57,7 +58,7 @@ def login(request):
             # return HttpResponse(userdetail.password)
             if passwords == userdetail.password:
                 # return HttpResponse(userdetail.position)
-                if(userdetail.position == "admin"):
+                if(userdetail.position == "Admin"):
                     return redirect('admain')
                     
                 elif(userdetail.position=="Counter"):

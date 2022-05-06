@@ -57,45 +57,31 @@
             <h4 >Admin</h4>
             <img src="admin.png" alt="Avatar">
           </div>
-          <div class="nepal">
-          <h2 class="kl">Customer Table</h2>
-
-        <table>
-          <tr>
-            <th>Customer Name</th>
-            <th>Email</th>
-            <th>Citizenship</th>
-            <th>Address</th>
-            <th>Meter Number</th>
-            <th>Status</th>
-            <th>Due</th>
-            <th>Delete</th>
-            <th>Activate</th>
-          </tr>
-          {%for result in data%}
-          <tr>
-              <td>{{result.customername}}</td>
-              <td>{{result.email}}</td>
-              <td>{{result.citizenship}}</td>
-              <td>{{result.address}}</td>
-              <td>{{result.meternum}}</td>
-              <td>{{result.status}}</td>
-              <td>{{result.totaldue}}</td>
-              <td><a href="deleteusers/{{result.email}}" onclick=" confirm('Are You Sure Want To Delete the Record?')">Delete</a></td>
+          <div class="">
+          <div class="login-form">
+            <form method="POST" action="billrateupdate">
+              {% csrf_token %}
+              {%for result in data%}
+              <h1>Rates</h1>
+              <div class="content">
+                <div class="input-field">
+                  Water Rate:<input type="number" name="rate" value="{{result.rate}}" autocomplete="nope">
+                </div>
+                <div class="input-field">
+                  Fine Percent:<input type="number" name="fine" value="{{result.fine}}" autocomplete="nope">
+                </div>
+                <div class="input-field">
+                  Discount Percent:<input type="number" name="discount" value="{{result.discount}}" autocomplete="nope">
+                </div>
+              </div>
+              <div class="action">
+                <button>Update</button>
+                {%endfor%}
+              </div>
               
-              {%if result.status == False%}
-                <td><a href="activateusers/{{result.email}}">Activate</a></td>
-              {%endif%}
-              {%if result.status == True%}
-                <td>Activated</td>
-              {%endif%}   
-          </tr>
-          {%endfor%}
-          
-        </table>
-    </div>
-        
-
+            </form>
+          </div>
+        </div>
         </div>
 
         <div class="col-lg-2 box">
@@ -106,7 +92,7 @@
             <li class="d p-2 text-center "><i class="fa fa-users" aria-hidden="true"></i><br><a class="a" href="{% url 'customer'%}">Customer</a></li>
             <li class="d p-2  text-center "><i class="fa fa-calculator" aria-hidden="true"></i><br><a class="a" href="{% url 'reader'%}">Meter Reader</a></li>
             <li class="d p-2 text-center "><i class="fa fa-id-card" aria-hidden="true"></i>><br><a class="a" href="{% url 'counter'%}">Counter</a></li>
-            <li class="d p-2 text-center "><i class="fa fa-building" aria-hidden="true"></i><br><a class="a" href="#">Bill Rate</a></li>
+            <li class="d p-2 text-center "><i class="fa fa-building" aria-hidden="true"></i><br><a class="a" href="{% url 'billrate'%}">Bill Rate</a></li>
           </ul>
 
 

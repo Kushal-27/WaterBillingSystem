@@ -4,6 +4,8 @@ from admin import views
 urlpatterns = [
     #path('', views.adminhome, name='adminhome'),
     #path('counter/registercounter', views.registercounter, name='registercounter'),
+    
+    path('activateusers/<str:email>',views.activateusers,name='activateusers'),
     path('registermeter', views.registerWorkers, name='registermeter'),
     path('displaycounter', views.displayWorker, name='displaycounter'),
     path('registerworkers/<str:position>', views.registerWorkers,name='registerworkers'),
@@ -21,5 +23,7 @@ urlpatterns = [
     path('displaycountertable',views.displaycountertable, name='displaycountertable'),
     path('displayWorkerdata/updateWorkerdata/<str:email>',views.updateWorkerdata,name='updateWorkerdata'),
     path('displayWorkerdata/<str:email>', views.displayWorkerdata,name='displayWorkerdata'),
+    path('billrate',views.billrate,name="billrate"),
+    path('billrateupdate',views.billrateupdate,name="billrateupdate")
        
 ]

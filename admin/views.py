@@ -1,15 +1,16 @@
 from ast import Return
 from asyncio.windows_events import NULL
 import email
+import re
 from this import d
 from turtle import pos, position
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from accounts.models import Customers
+from accounts.models import Customers,Rates
 from admin.models import Users
 from django.contrib import messages 
-from admin.forms import userforms
+from admin.forms import userforms,customerforms,ratesforms
 from django.contrib import messages
 #from accounts.models import Users as sa
 # # Create your views here.
@@ -87,15 +88,12 @@ def deleteusers(request,email):
             delcust=Customers.objects.get(email=email)  
             delcust.delete()
             showdata=Customers.objects.all()   
-            return render(request,"admincustomer.html",{"data":showdata})
-        elif position=="counter":
-            
-            #return HttpResponse(showall)
-            #showcounter=Users.objects.all().filter(position=position)
-            return render(request,"editcountertabel.html",{"data":showall})
+            return redirect('customer')
+        elif position=="Counter": 
+            return redirect('displaycountertable')    
         else:
             # return HttpResponse(showall)
-            return render(request,"editmeterreadertable.html",{"data":showall})
+            return redirect("displaymeterreader.html")
     except:
         delcust=Customers.objects.get(email=email)
         delcust.delete()
@@ -103,18 +101,17 @@ def deleteusers(request,email):
         return render(request,"admincustomer.html",{"data":showdata})
 
 #updates the status of customer into true and adds the customer into the user table
-def updateCustomerStatus(request,email):
-    updateData=Customers.objects.get(pk=email)
-    customername=updateData.customername
-    citizenship=updateData.citizenship
-    address=updateData.address
-    password=updateData.password
-    status=True
-    customertable=Customers(email=email,customername=customername,citizenship=citizenship, address=address,password=password,status=status)
-    usertable=Users(email=email,citizenship=citizenship,username=customername,password=password,position="Customer")
-    customertable.save()
-    usertable.save() 
-    return render(request,'admin.html')
+def activateusers(request,email):
+    cust=Customers.objects.get(email=email)
+    thisdict={"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":True,"currentunit":cust.currentunit,"discountamount": cust.discountamount ,"fineamount":cust.fineamount,"previousunit":cust.currentunit,"totaldue":cust.totaldue,"meternum":cust.meternum}          
+    form=customerforms(thisdict,instance=cust)
+    if form.is_valid():
+        form.save()
+        saverecord = Users(email=cust.email,citizenship=cust.citizenship,password=cust.password,position="Customer")
+        saverecord.save()
+    else:
+        return HttpResponse("failed")
+    return redirect('customer')
     
 #redirect the pages into the given html files (line 89-100)
 def counter(request):
@@ -142,7 +139,7 @@ def addmeterreader(request):
             
             return redirect('registermeter')
         else:
-            saverecord = Users(email=email,citizenship=citizenship,password="Pass",position="Meterreader")
+            saverecord = Users(email=email,citizenship=citizenship,password="passwords",position="Meterreader")
             saverecord.save()
             print('user created')
             return redirect('reader')    
@@ -162,7 +159,7 @@ def addcounter(request):
             
             return redirect('addcounter')
         else:
-            saverecord = Users(email=email,citizenship=citizenship,password="Pass",position="Counter")
+            saverecord = Users(email=email,citizenship=citizenship,password="passwords",position="Counter")
             saverecord.save()
             print('user created')
             return redirect('counter')    
@@ -196,4 +193,23 @@ def updateWorkerdata(request,email):
         return render(request,'editmeterreader.html',{"data":updateData})
     else:
         return HttpResponse("failed")
+
+def billrateupdate(request):
+    if request.method == 'POST':           
+        updateData=Rates.objects.filter(pk=1)  
+        # return HttpResponse(updateData)
+        rate=request.POST.get('rate')
+        fine=request.POST.get('fine')
+        discount=request.POST.get('discount')
+        dicts={"rate":rate,"fine":fine,"discount":discount} 
+        form=ratesforms(dicts,instance=updateData)
+        return HttpResponse(form)
+        if form.is_valid():
+            form.save()
+        return redirect('billrate')  
+
+def billrate(request):
+        # return HttpResponse("hdsai")
+        data=Rates.objects.filter(pk=1)
+        return render(request,'billrate.html',{"data":data})
     
