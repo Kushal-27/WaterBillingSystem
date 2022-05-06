@@ -1,6 +1,7 @@
 from ast import Return
 from asyncio.windows_events import NULL
 import email
+from http.client import HTTPResponse
 import re
 from this import d
 from turtle import pos, position
@@ -103,7 +104,8 @@ def deleteusers(request,email):
 #updates the status of customer into true and adds the customer into the user table
 def activateusers(request,email):
     cust=Customers.objects.get(email=email)
-    thisdict={"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":True,"currentunit":cust.currentunit,"discountamount": cust.discountamount ,"fineamount":cust.fineamount,"previousunit":cust.currentunit,"totaldue":cust.totaldue,"meternum":cust.meternum}          
+    thisdict={"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":True,"currentunit":cust.currentunit,"discountamount": cust.discountamount ,"fineamount":cust.fineamount,"previousunit":cust.currentunit,"totaldue":cust.totaldue,"meternum":cust.meternum}
+    return HTTPResponse(thisdict)          
     form=customerforms(thisdict,instance=cust)
     if form.is_valid():
         form.save()
@@ -196,14 +198,17 @@ def updateWorkerdata(request,email):
 
 def billrateupdate(request):
     if request.method == 'POST':           
-        updateData=Rates.objects.filter(pk=1)  
+        updateData=Rates.objects.all()  
         # return HttpResponse(updateData)
         rate=request.POST.get('rate')
         fine=request.POST.get('fine')
         discount=request.POST.get('discount')
-        dicts={"rate":rate,"fine":fine,"discount":discount} 
+        # dicts={"id":1,"rate":rate,"fine":fine,"discount":discount}
+        saverecord=Rates(id=1,rate=rate,fine=fine,discount=discount)
+        saverecord.save()
+        return redirect('billrate')
         form=ratesforms(dicts,instance=updateData)
-        return HttpResponse(form)
+        
         if form.is_valid():
             form.save()
         return redirect('billrate')  
