@@ -32,7 +32,7 @@ def registerWorkers(request,position):
             saverecord = Users(email=email,citizenship=citizenship,password="Pass",position=position)
             saverecord.save()
             print('user created')
-            if position=="counter":
+            if position=="Counter":
                 return redirect('counter')
             else:
                 return redirect('reader')    
@@ -94,7 +94,7 @@ def deleteusers(request,email):
             return redirect('displaycountertable')    
         else:
             # return HttpResponse(showall)
-            return redirect("displaymeterreader.html")
+            return redirect("displaymeterreader")
     except:
         delcust=Customers.objects.get(email=email)
         delcust.delete()
