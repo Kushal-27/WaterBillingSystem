@@ -43,7 +43,7 @@ def counterhome(request):
                 # return HttpResponse("error")
             else:
                     # return HttpResponse("failed")
-                messages.success(request,"Adding meter unit failed.")
+                messages.success(request,"Payment failed.")
             returndict= {"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":cust.currentunit,"discountamount": discountamount ,"fineamount":cust.fineamount,"previousunit":cust.previousunit,"totaldue":totaldue,"meternum":cust.meternum,"returnmoney":returnmoney}
             return render(request,'counterhome.html',returndict)    
         except:
