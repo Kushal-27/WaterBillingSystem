@@ -37,7 +37,6 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown ">
             <li><a class="dropdown-item" href="#">Log-Out</a></li>
-            <li><a class="dropdown-item" href="#">Change-Pw </a></li>
             
           </ul>
         </span>
@@ -65,13 +64,13 @@
               <h1>Rates</h1>
               <div class="content">
                 <div class="input-field">
-                  Water Rate:<input type="number" name="rate" value="{{result.rate}}" autocomplete="nope">
+                  Water Rate:<input type="number" name="rate" value="{{result.rate}}" autocomplete="nope" min=0>
                 </div>
                 <div class="input-field">
-                  Fine Percent:<input type="number" name="fine" value="{{result.fine}}" autocomplete="nope">
+                  Fine Percent:<input type="number" name="fine" value="{{result.fine}}" autocomplete="nope" min=0>
                 </div>
                 <div class="input-field">
-                  Discount Percent:<input type="number" name="discount" value="{{result.discount}}" autocomplete="nope">
+                  Discount Percent:<input type="number" name="discount" value="{{result.discount}}" autocomplete="nope" min=0>
                 </div>
               </div>
               <div class="action">
