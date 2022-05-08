@@ -1,3 +1,4 @@
+from datetime import date
 from math import degrees
 from django.db import models
 from django.forms import NullBooleanField
@@ -27,3 +28,7 @@ class Rates(models.Model):
     rate= models.IntegerField(default=0)
     fine=models.IntegerField(default=0)
     discount=models.IntegerField(default=0)
+
+class Revenue(models.Model):
+    date = models.DateField()
+    amount = models.BigIntegerField(default=0)
