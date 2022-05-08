@@ -17,7 +17,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="img/Transparent.png" alt="" class="logo"></a>
+    <a class="navbar-brand" href="#"><img src="{% static 'images/Transparent.png' %}" alt="" class="logo"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,10 +55,10 @@
         <div class="col-lg-10 ">
           <div class="admin">
             <h4 >Admin</h4>
-            <img src="admin.png" alt="Avatar">
+            <img src="{% static 'images/admin.png' %}" alt="Avatar">
           </div>
           <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -174,7 +174,7 @@
             <li class="d p-2 text-center "><i class="fa fa-user" aria-hidden="true"></i><br><a class="a" href="{% url 'admain'%}">Admin</a></li>
             <li class="d p-2 text-center "><i class="fa fa-users" aria-hidden="true"></i><br><a class="a" href="{% url 'customer'%}">Customer</a></li>
             <li class="d p-2  text-center "><i class="fa fa-calculator" aria-hidden="true"></i><br><a class="a" href="{% url 'reader'%}">Meter Reader</a></li>
-            <li class="d p-2 text-center "><i class="fa fa-id-card" aria-hidden="true"></i>><br><a class="a" href="{% url 'counter'%}">Counter</a></li>
+            <li class="d p-2 text-center "><i class="fa fa-id-card" aria-hidden="true"></i><br><a class="a" href="{% url 'counter'%}">Counter</a></li>
             <li class="d p-2 text-center "><i class="fa fa-building" aria-hidden="true"></i><br><a class="a" href="{% url 'billrate'%}">Bill Rate</a></li>
           </ul>
 
@@ -191,7 +191,7 @@
 <div class="row ">
 
 <div class="col-lg-4 mt-3">
-<img src="img/Transparent.png" class="fl" alt="">
+<img src="{% static 'images/Transparent.png' %}" class="fl" alt="">
 </div>
 <div class="col-lg-4 mt-3  ctn">
 <h2>Contact</h2>
