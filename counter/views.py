@@ -1,3 +1,4 @@
+
 from mmap import PAGESIZE
 import this
 from django.http import HttpResponse
@@ -31,13 +32,13 @@ def counterhome(request):
             discountamount=0
             returnmoney=0
             if enteredmoney<totaldue:
-                if fineamount==0:
-                    discountamount=round((discountrate/100)*totaldue)
-                    totaldue=totaldue- discountamount
+                
                 totaldue=totaldue-enteredmoney    
             else:
+                if fineamount==0:
+                    discountamount=round((discountrate/100)*totaldue)
                 totaldue=0
-                returnmoney= enteredmoney-cust.totaldue        
+                returnmoney= enteredmoney-cust.totaldue+discountamount        
             thisdict={"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":cust.currentunit,"discountamount": discountamount ,"fineamount":cust.fineamount,"previousunit":cust.previousunit,"totaldue":totaldue,"meternum":cust.meternum}
                 
             form=customerforms(thisdict,instance=cust)
@@ -49,13 +50,27 @@ def counterhome(request):
                 textob.setTextOrigin(inch,inch)
                 textob.setFont('Helvetica',14)
                 lines= []
-                lines.append(cust.customername)
-                lines.append(cust.email)
-                lines.append(cust.citizenship)
-                lines.append(cust.discountamount)
-                lines.append(cust.totaldue)
+                
+                # datas="Customer name = "+str(cust.customername)+"<br>Customer email = "+str(cust.email)+"<br>Customer citizenship = "+str(cust.citizenship)+"<br>Address = ",str(cust.address)+"<br>Meter number = "+str(cust.meternum)+"<br>Fine amount = "+str(cust.fineamount)+"<br>Discount amount = "+str(discountamount)+"<br>Totaldue = "+str(totaldue)+ "<br>Given money = "+str(enteredmoney)+"<br>Returned money = "+str(returnmoney)
+                # 
+                
+                lines.append("Customer name = "+str(cust.customername))
+                
+                lines.append("Customer email = "+str(cust.email))
+                
+                lines.append("Customer citizenship = "+str(cust.citizenship))
+                
+                lines.append("Address = "+str(cust.address))
+                lines.append("Meter number = "+str(cust.meternum))
+                lines.append("Fine amount = "+str(cust.fineamount))
+                lines.append("Discount amount = "+str(discountamount))
+                lines.append("Totaldue = "+str(totaldue))
+                lines.append("Given money = "+str(enteredmoney))
+                lines.append("Returned money = "+str(returnmoney))
+                # return HttpResponse(lines)
                 for line in lines:
                     textob.textLine(line)
+                # return HttpResponse(cust.totaldue)
                 c.drawText(textob)
                 c.showPage()
                 c.save()
@@ -70,8 +85,7 @@ def counterhome(request):
             else:
                     # return HttpResponse("failed")
                 messages.success(request,"Payment failed.")
-            returndict= {"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":cust.currentunit,"discountamount": discountamount ,"fineamount":cust.fineamount,"previousunit":cust.previousunit,"totaldue":totaldue,"meternum":cust.meternum,"returnmoney":returnmoney}
-            return render(request,'counterhome.html',returndict)    
+              
         except:
             # return HttpResponse("User does not exist")
             messages.success(request,"Meter number does not exist")
