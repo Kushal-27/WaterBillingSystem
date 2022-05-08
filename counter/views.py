@@ -1,12 +1,19 @@
+from mmap import PAGESIZE
 import this
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from accounts.models import Users
 from accounts.models import Customers
 from accounts.models import Rates
 from counter.forms import customerforms
 from django.contrib import messages
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+
+
 # Create your views here.
 def counterhome(request):
     if request.method == "POST":
@@ -36,10 +43,29 @@ def counterhome(request):
             form=customerforms(thisdict,instance=cust)
                 # return HttpResponse(form)
             if form.is_valid():
+                buf = io.BytesIO()
+                c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+                textob = c.beginText()
+                textob.setTextOrigin(inch,inch)
+                textob.setFont('Helvetica',14)
+                lines= []
+                lines.append(cust.customername)
+                lines.append(cust.email)
+                lines.append(cust.citizenship)
+                lines.append(cust.discountamount)
+                lines.append(cust.totaldue)
+                for line in lines:
+                    textob.textLine(line)
+                c.drawText(textob)
+                c.showPage()
+                c.save()
+                buf.seek(0)
+                
                 form.save()
                 # return HttpResponse("dsa")
                 messagess="Paid successfully. Money due:",cust.totaldue,". Remaining money:",returnmoney
                 messages.success(request,messagess)
+                return FileResponse(buf, as_attachment=True, filename='receipt.pdf')
                 # return HttpResponse("error")
             else:
                     # return HttpResponse("failed")
