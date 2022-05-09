@@ -36,7 +36,7 @@ def meterreaderhome(request):
                     totaldue=int(cust.totaldue) + currentunit*(int(rates.rate))
                 # return HttpResponse(fineamount)    
                 thisdict={"customername":cust.customername,"email":cust.email,"citizenship":cust.citizenship,"address":cust.address,"password":cust.password,"status":cust.status,"currentunit":lastestunit,"discountamount": 0 ,"fineamount":fineamount,"previousunit":cust.currentunit,"totaldue":totaldue,"meternum":cust.meternum}
-                
+                previousdue=cust.totaldue
                 form=customerforms(thisdict,instance=cust)
                 # return HttpResponse(form)
                 if form.is_valid():
@@ -56,10 +56,9 @@ def meterreaderhome(request):
                     
                     lines.append("Address = "+str(cust.address))
                     lines.append("Meter number = "+str(cust.meternum))
-                    lines.append("Meter number = "+str(cust.meternum))
                     lines.append("Current meter unit = "+str(lastestunit))
-                    lines.append("Previous meter unit = "+str(cust.currentunit))
-                    lines.append("Previous due = "+str(cust.totaldue))
+                    lines.append("Previous meter unit = "+str(previousunit))
+                    lines.append("Previous due = "+str(previousdue))
                     lines.append("Fine amount = "+str(cust.fineamount))
                     lines.append("Totaldue = "+str(totaldue))
                     # return HttpResponse(lines)
@@ -72,7 +71,6 @@ def meterreaderhome(request):
                     buf.seek(0)
                     form.save()
                     file=str(cust.meternum)+".pdf"
-                    messages.success(request,"Meter unit added successfully")
                     return FileResponse(buf, as_attachment=True, filename=file)
                 else:
                     # return HttpResponse("failed")
