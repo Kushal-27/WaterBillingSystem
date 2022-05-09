@@ -144,8 +144,10 @@ def addmeterreader(request):
         citizenship = request.POST.get('citizenship')
                   
         if cust.filter(email=email).exists() or cust.filter(citizenship=citizenship).exists():
-            print('email taken')
-            
+            if cust.filter(email=email).exists():
+                messages.success(request,'Email registered already')
+            if cust.filter(citizenship=citizenship).exists():
+                messages.success(request,'Citizenship registered already')
             return redirect('registermeter')
         else:
             saverecord = Users(email=email,citizenship=citizenship,password="passwords",position="Meterreader")
@@ -165,7 +167,10 @@ def addcounter(request):
                   
         if cust.filter(email=email).exists() or cust.filter(citizenship=citizenship).exists():
             print('email taken')
-            
+            if cust.filter(email=email).exists():
+                messages.success(request,'Email registered already')
+            if cust.filter(citizenship=citizenship).exists():
+                messages.success(request,'Citizenship registered already')
             return redirect('addcounter')
         else:
             saverecord = Users(email=email,citizenship=citizenship,password="passwords",position="Counter")

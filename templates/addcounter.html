@@ -70,7 +70,11 @@
           <input type="text"  name= 'citizenship'placeholder="Citizenship:" >
         </div>
       </div>
-
+      {%if messages%}
+                        {%for mess in messages%}
+                        <b style="color: red;">{{mess}}</b>
+                        {%endfor%}
+      {%endif%}
       <div class="action">
         <button>Submit</button>
       </div>
