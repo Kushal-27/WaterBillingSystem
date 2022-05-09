@@ -1,11 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from accounts.models import Users
 from accounts.models import Customers
 from accounts.models import Rates
 from meterreader.forms import customerforms
 from django.contrib import messages
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
 # Create your views here.
 def meterreaderhome(request):
     if request.method == "POST":
@@ -36,8 +40,40 @@ def meterreaderhome(request):
                 form=customerforms(thisdict,instance=cust)
                 # return HttpResponse(form)
                 if form.is_valid():
+                    buf = io.BytesIO()
+                    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+                    textob = c.beginText()
+                    textob.setTextOrigin(inch,inch)
+                    textob.setFont('Helvetica',14)
+                    lines= []
+                    
+                    
+                    lines.append("Customer name = "+str(cust.customername))
+                    
+                    lines.append("Customer email = "+str(cust.email))
+                    
+                    lines.append("Customer citizenship = "+str(cust.citizenship))
+                    
+                    lines.append("Address = "+str(cust.address))
+                    lines.append("Meter number = "+str(cust.meternum))
+                    lines.append("Meter number = "+str(cust.meternum))
+                    lines.append("Current meter unit = "+str(lastestunit))
+                    lines.append("Previous meter unit = "+str(cust.currentunit))
+                    lines.append("Previous due = "+str(cust.totaldue))
+                    lines.append("Fine amount = "+str(cust.fineamount))
+                    lines.append("Totaldue = "+str(totaldue))
+                    # return HttpResponse(lines)
+                    for line in lines:
+                        textob.textLine(line)
+                    # return HttpResponse(cust.totaldue)
+                    c.drawText(textob)
+                    c.showPage()
+                    c.save()
+                    buf.seek(0)
                     form.save()
+                    file=str(cust.meternum)+".pdf"
                     messages.success(request,"Meter unit added successfully")
+                    return FileResponse(buf, as_attachment=True, filename=file)
                 else:
                     # return HttpResponse("failed")
                     messages.success(request,"Adding meter unit failed")
@@ -55,6 +91,7 @@ def meterreaderhome(request):
             return render(request,"meterreaderhome.html")
     else:
         return render(request,'meterreaderhome.html')
+        
     
 
 def changepass(request,email):
