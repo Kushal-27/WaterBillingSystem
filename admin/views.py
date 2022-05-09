@@ -8,11 +8,13 @@ from turtle import pos, position
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from accounts.models import Customers,Rates
+from accounts.models import Customers,Rates, Revenue
 from admin.models import Users
 from django.contrib import messages 
 from admin.forms import userforms,customerforms,ratesforms
 from django.contrib import messages
+from random import randrange
+import json
 #from accounts.models import Users as sa
 # # Create your views here.
 # Registers new employee into the database
@@ -126,8 +128,13 @@ def customer(request):
     showall=Customers.objects.all()
     return render(request,'admincustomer.html',{"data":showall})
 
-def admain(request):
-    return render(request,'admin.html')
+def admain(request):   
+    rev = Revenue.objects.all()
+    data = [["Amount","Date"]]
+    for revs in rev:
+        data.append([str(revs.date),revs.amount])
+    modified_data = json.dumps(data)
+    return render(request,'admin.html',{'data':modified_data})
 
 def addmeterreader(request):
     if request.method == 'POST':

@@ -67,16 +67,10 @@
                 google.charts.setOnLoadCallback(drawChart);
           
                 function drawChart() {
-                  var data = google.visualization.arrayToDataTable([
-                    ['Year', 'Sales', 'Expenses'],
-                    ['2004',  1000,      400],
-                    ['2005',  1170,      460],
-                    ['2006',  660,       1120],
-                    ['2007',  1030,      540]
-                  ]);
+                  var data = google.visualization.arrayToDataTable({{data|safe}});
           
                   var options = {
-                    title: 'Company Performance',
+                    title: 'Revenue Collected',
                     curveType: 'function',
                     legend: { position: 'bottom' }
                   };
