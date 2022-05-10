@@ -91,8 +91,6 @@ def counterhome(request):
                 
                 form.save()
                 # return HttpResponse("dsa")
-                messagess="Paid successfully. Money due:",cust.totaldue,". Returning money:",returnmoney
-                messages.success(request,messagess)
                 return FileResponse(buf, as_attachment=True, filename='receipt.pdf')
                 # return HttpResponse("error")
             else:
