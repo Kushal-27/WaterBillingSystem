@@ -81,12 +81,20 @@
       <td><input type="text" name="password" value="{{data.password}}"></td>
   
     </tr>
+  
    
   </table>
   
   
               <div class="action">
                 <button>Submit</button>
+                <td>
+                  {%if messages%}
+                  {%for mess in messages%}
+                  <b style="color: red;">{{mess}}</b>
+                  {%endfor%}
+                  {%endif%}
+              </td>
               </div>
               
             </form>
