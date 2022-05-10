@@ -5,15 +5,15 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, FileResponse
 from accounts.models import Users
-from accounts.models import Customers
+from accounts.models import Customers, Revenue
 from accounts.models import Rates
-from counter.forms import customerforms
+from counter.forms import customerforms, revenueforms
 from django.contrib import messages
 import io
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
-
+from datetime import date
 
 # Create your views here.
 def counterhome(request):
@@ -75,6 +75,19 @@ def counterhome(request):
                 c.showPage()
                 c.save()
                 buf.seek(0)
+                todaydate = date.today()
+                revs = Revenue.objects.all()
+                if revs.filter(date=todaydate).exists():
+                    rev = Revenue.objects.get(date=todaydate)
+                    totamt = rev.amount + enteredmoney - returnmoney
+                    dict = {"date":rev.date,"amount":totamt}
+                    forms = revenueforms(dict,instance=rev)
+                    if forms.is_valid():
+                        forms.save()
+                else:
+                    totamt = enteredmoney - returnmoney
+                    saverecord = Revenue(date=todaydate,amount=totamt)
+                    saverecord.save()
                 
                 form.save()
                 # return HttpResponse("dsa")

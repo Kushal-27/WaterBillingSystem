@@ -1,5 +1,5 @@
 from django import forms
-from accounts.models import Users,Customers,Rates
+from accounts.models import Revenue, Users,Customers,Rates
 
 class userforms(forms.ModelForm):
     class Meta:
@@ -15,3 +15,4 @@ class ratesforms(forms.ModelForm):
     class Meta:
         model=Rates
         fields='__all__'
+
