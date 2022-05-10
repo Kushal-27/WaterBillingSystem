@@ -100,8 +100,7 @@ def deleteusers(request,email):
     except:
         delcust=Customers.objects.get(email=email)
         delcust.delete()
-        showdata=Customers.objects.all()   
-        return render(request,"admincustomer.html",{"data":showdata})
+        return redirect('customer')
 
 #updates the status of customer into true and adds the customer into the user table
 def activateusers(request,email):
