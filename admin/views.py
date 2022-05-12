@@ -100,8 +100,7 @@ def deleteusers(request,email):
     except:
         delcust=Customers.objects.get(email=email)
         delcust.delete()
-        showdata=Customers.objects.all()   
-        return render(request,"admincustomer.html",{"data":showdata})
+        return redirect('customer')
 
 #updates the status of customer into true and adds the customer into the user table
 def activateusers(request,email):
@@ -219,14 +218,9 @@ def billrateupdate(request):
         saverecord=Rates(id=1,rate=rate,fine=fine,discount=discount)
         saverecord.save()
         return redirect('billrate')
-        form=ratesforms(dicts,instance=updateData)
-        
-        if form.is_valid():
-            form.save()
-        return redirect('billrate')  
 
 def billrate(request):
         # return HttpResponse("hdsai")
-        data=Rates.objects.filter(pk=1)
+        data=Rates.objects.all()
         return render(request,'billrate.html',{"data":data})
     
