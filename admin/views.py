@@ -140,20 +140,19 @@ def addmeterreader(request):
     if request.method == 'POST':
         cust = Users.objects.all()
             
-        email = request.POST.get('email')
-        citizenship = request.POST.get('citizenship')
-                  
+        emails = request.POST.get('email')
+        email= emails.lower()
+        citizenships = request.POST.get('citizenship')
+        citizenship=citizenships.lower()         
         if cust.filter(email=email).exists() or cust.filter(citizenship=citizenship).exists():
-            if cust.filter(email=email).exists():
-                messages.success(request,'Email registered already')
-            if cust.filter(citizenship=citizenship).exists():
-                messages.success(request,'Citizenship registered already')
-            return redirect('registermeter')
+            print('email taken')
+            
+            return redirect('addmeterreader')
         else:
             saverecord = Users(email=email,citizenship=citizenship,password="passwords",position="Meterreader")
             saverecord.save()
             print('user created')
-            return redirect('reader')    
+            return redirect('addmeterreader')    
     else:
         # return HttpResponse("hdsai")
         return render(request,'addmeterreader.html')
@@ -162,15 +161,14 @@ def addcounter(request):
     if request.method == 'POST':
         cust = Users.objects.all()
             
-        email = request.POST.get('email')
-        citizenship = request.POST.get('citizenship')
+        emails = request.POST.get('email')
+        email= emails.lower()
+        citizenships = request.POST.get('citizenship')
+        citizenship=citizenships.lower()     
                   
         if cust.filter(email=email).exists() or cust.filter(citizenship=citizenship).exists():
             print('email taken')
-            if cust.filter(email=email).exists():
-                messages.success(request,'Email registered already')
-            if cust.filter(citizenship=citizenship).exists():
-                messages.success(request,'Citizenship registered already')
+            
             return redirect('addcounter')
         else:
             saverecord = Users(email=email,citizenship=citizenship,password="passwords",position="Counter")
@@ -180,6 +178,8 @@ def addcounter(request):
     else:
         # return HttpResponse("hdsai")
         return render(request,'addcounter.html')
+
+
     
 def displaycountertable(request):
     showall=Users.objects.filter(position='Counter')

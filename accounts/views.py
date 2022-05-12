@@ -7,24 +7,27 @@ from accounts.models import Customers,Users
 from django.contrib import messages
 #from django.db import connection
 
-
 # Create your views here.
-
 
 # Registers new user in the Database after fetching the data from the user
 def register(request):
     if request.method == 'POST':
         cust = Customers.objects.all()
+        users=Users.objects.all()
         name=request.POST.get('full_name')    
-        email = request.POST.get('email')
-        citizenship = request.POST.get('citizenship')
+        emails = request.POST.get('email')
+        email=emails.lower()
+        citizenships = request.POST.get('citizenship')
+        citizenship=citizenships.lower()
         address = request.POST.get('address')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
         meternum=request.POST.get('meternum')
         if password1==password2:
             
-            if cust.filter(email=email).exists() or cust.filter(citizenship=citizenship).exists() or cust.filter(meternum=meternum).exists():
+            if cust.filter(email=email).exists() or cust.filter(citizenship=citizenship).exists() or cust.filter(meternum=meternum).exists() or users.filter(email=email).exists():
+                if users.filter(email=email).exists:
+                    messages.success(request,"Email used by officials not for customers")
                 if cust.filter(email=email).exists():
                     messages.success(request,"Email Taken already.")
                 if  cust.filter(citizenship=citizenship).exists():
@@ -50,7 +53,8 @@ def register(request):
 def login(request):
     if request.method == 'POST':
         cust = Users.objects.all()
-        email=request.POST.get('email')
+        emails = request.POST.get('email')
+        email=emails.lower()
         passwords = request.POST.get('password')
         try:
             # return HttpResponse(email)
@@ -77,11 +81,10 @@ def login(request):
             messages.success(request,"User not found or inactive")
             return redirect('login')
 
-
     else:
 
         return render(request,'login.html')
 
+    
+    
 
-    
-    
