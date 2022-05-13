@@ -23,6 +23,7 @@ def registerWorkers(request,position):
         cust = Users.objects.all()
             
         email = request.POST.get('email')
+        email = email.lower()
         citizenship = request.POST.get('citizenship')
                   
         if cust.filter(email=email).exists() or cust.filter(citizenship=citizenship).exists():
