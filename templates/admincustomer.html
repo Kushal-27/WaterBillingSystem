@@ -79,7 +79,7 @@
               <td>{{result.meternum}}</td>
               <td>{{result.status}}</td>
               <td>{{result.totaldue}}</td>
-              <td><a href="deleteusers/{{result.email}}" onclick=" confirm('Are You Sure Want To Delete the Record?')">Delete</a></td>
+              <td><a href="deleteusers/{{result.email}}">Delete</a></td>
               
               {%if result.status == False%}
                 <td><a href="activateusers/{{result.email}}">Activate</a></td>
