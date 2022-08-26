@@ -152,7 +152,8 @@ def addmeterreader(request):
             saverecord = Users(email=email,citizenship=citizenship,password="passwords",position="Meterreader")
             saverecord.save()
             print('user created')
-            return redirect('addmeterreader')    
+            # return HttpResponse("hdsai")
+            return redirect('reader')    
     else:
         # return HttpResponse("hdsai")
         return render(request,'addmeterreader.html')
@@ -178,7 +179,6 @@ def addcounter(request):
     else:
         # return HttpResponse("hdsai")
         return render(request,'addcounter.html')
-
 
     
 def displaycountertable(request):
@@ -225,3 +225,5 @@ def billrate(request):
         data=Rates.objects.all()
         return render(request,'billrate.html',{"data":data})
     
+
+
